@@ -8,8 +8,8 @@ const String _signUpEndpoint = '/api/account/signup';
 const String _signInEndpoint = '/api/account/signin';
 
 abstract class AuthRemoteDataSource {
-  Future<UserModel> signUp(AuthDataModel authDataModel);
-  Future<UserModel> signIn(AuthDataModel authDataModel);
+  Future<UserModel> signUp(AuthDataModel authData);
+  Future<UserModel> signIn(AuthDataModel authData);
 }
 
 class AuthRemoteDataSourceImpl extends AuthRemoteDataSource {
@@ -18,7 +18,7 @@ class AuthRemoteDataSourceImpl extends AuthRemoteDataSource {
   final http.Client _httpClient;
 
   @override
-  Future<UserModel> signUp(AuthDataModel authDataModel) async {
+  Future<UserModel> signUp(AuthDataModel authData) async {
     try {
       final uri = Uri.http(AppConstants.baseURL, _signUpEndpoint);
       final response = await _httpClient.get(uri);
@@ -29,7 +29,7 @@ class AuthRemoteDataSourceImpl extends AuthRemoteDataSource {
   }
 
   @override
-  Future<UserModel> signIn(AuthDataModel authDataModel) async {
+  Future<UserModel> signIn(AuthDataModel authData) async {
     try {
       final uri = Uri.http(AppConstants.baseURL, _signInEndpoint);
       final response = await _httpClient.get(uri);
