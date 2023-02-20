@@ -19,6 +19,7 @@ class AuthRepositoryImpl extends AuthRepository {
   Future<Either<ServerException, UserModel>> signUp(AuthDataModel authData) async {
     try {
       final user = await _remoteDataSource.signUp(authData);
+      _localDataSource.saveSignedInUser(user);
       return Right(user);
     } on ServerException catch (e) {
       return Left(ServerException(message: e.message));
@@ -29,6 +30,7 @@ class AuthRepositoryImpl extends AuthRepository {
   Future<Either<ServerException, UserModel>> signIn(AuthDataModel authData) async {
     try {
       final user = await _remoteDataSource.signIn(authData);
+      _localDataSource.saveSignedInUser(user);
       return Right(user);
     } on ServerException catch (e) {
       return Left(ServerException(message: e.message));
@@ -36,12 +38,22 @@ class AuthRepositoryImpl extends AuthRepository {
   }
 
   @override
-  Future<Either<CacheException, bool>> isUserSignedIn() {
-    throw UnimplementedError();
+  Future<Either<CacheException, bool>> isUserSignedIn() async {
+    try {
+      final isUserSignedIn = await _localDataSource.isUserSignedIn();
+      return Right(isUserSignedIn);
+    } on ServerException catch (e) {
+      return Left(CacheException(message: e.message));
+    }
   }
 
   @override
-  Future<Either<CacheException, UserModel>> restoreUser() {
-    throw UnimplementedError();
+  Future<Either<CacheException, UserModel>> restoreUser() async {
+    try {
+      final user = await _localDataSource.restoreUser();
+      return Right(user);
+    } on ServerException catch (e) {
+      return Left(CacheException(message: e.message));
+    }
   }
 }

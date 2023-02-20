@@ -3,10 +3,14 @@ import 'package:balinasoft_test/features/auth/data/repository/auth_repository_im
 import 'package:balinasoft_test/features/auth/domain/repository/auth_repository.dart';
 import 'package:get_it/get_it.dart';
 import 'package:http/http.dart' as http;
+import 'package:shared_preferences/shared_preferences.dart';
 
 final sl = GetIt.instance;
 
 Future<void> initDependencies() async {
+  SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
+  sl.registerSingleton<SharedPreferences>(sharedPreferences);
+
   http.Client httpClient = http.Client();
   sl.registerSingleton<http.Client>(httpClient);
 
