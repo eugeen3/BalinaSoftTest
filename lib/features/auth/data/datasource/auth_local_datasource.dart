@@ -37,7 +37,7 @@ class AuthLocalDataSourceImpl extends AuthLocalDataSource {
       if (user != null) {
         return UserModel.fromJson(user);
       } else {
-        throw CacheException(message: LocalizationConstants.restorUserError);
+        throw CacheException(message: LocalizationConstants.errorRestorUser);
       }
     } catch (e) {
       throw CacheException(message: 'AuthLocalDataSource restoreUser() exception: $e');

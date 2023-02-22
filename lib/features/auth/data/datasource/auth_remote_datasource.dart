@@ -3,9 +3,9 @@ import 'dart:convert';
 import 'package:balinasoft_test/core/constants/app_constants.dart';
 import 'package:balinasoft_test/core/constants/localization_constants.dart';
 import 'package:balinasoft_test/core/exception/exception.dart';
-import 'package:balinasoft_test/features/auth/auth_type.dart';
 import 'package:balinasoft_test/features/auth/data/models/auth_data_model.dart';
 import 'package:balinasoft_test/features/auth/data/models/user_model.dart';
+import 'package:balinasoft_test/features/auth/utils/auth_type.dart';
 import 'package:http/http.dart' as http;
 
 abstract class AuthRemoteDataSource {
@@ -32,7 +32,7 @@ class AuthRemoteDataSourceImpl extends AuthRemoteDataSource {
         return UserModel.fromJson(response.body);
       } else {
         final error = jsonDecode(response.body)['error'];
-        throw ServerException(message: '${LocalizationConstants.authError}: $error');
+        throw ServerException(message: '${LocalizationConstants.errorAuth}: $error');
       }
     } catch (e) {
       throw ServerException(message: 'AuthRemoteDataSource signUp() exception: $e');
