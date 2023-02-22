@@ -13,6 +13,7 @@ dependencies:
   equatable: ^2.0.5
   flutter:
     sdk: flutter
+  flutter_bloc: ^8.1.2
   get_it: ^7.2.0
   http: ^0.13.5
   shared_preferences: ^2.0.17
