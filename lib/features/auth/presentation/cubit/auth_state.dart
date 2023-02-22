@@ -6,25 +6,25 @@ class AuthLoginState extends Equatable {
     this.login,
     this.password,
     bool? waitingForResponse,
-    this.user,
+    this.errorMessage,
   }) : waitingForResponse = waitingForResponse ?? false;
 
   final String? login;
   final String? password;
   final bool waitingForResponse;
-  final UserModel? user;
+  final String? errorMessage;
 
   AuthLoginState copyWith({
     String? login,
     String? password,
     bool? waitingForResponse,
-    UserModel? user,
+    String? errorMessage,
   }) {
     return AuthLoginState(
       login: login ?? this.login,
       password: password ?? this.password,
       waitingForResponse: waitingForResponse ?? this.waitingForResponse,
-      user: user ?? this.user,
+      errorMessage: errorMessage ?? this.errorMessage,
     );
   }
 
@@ -32,7 +32,7 @@ class AuthLoginState extends Equatable {
   bool get stringify => true;
 
   @override
-  List<Object?> get props => [login, password, waitingForResponse, user];
+  List<Object?> get props => [login, password, waitingForResponse, errorMessage];
 }
 
 class AuthRegisterState extends AuthLoginState {
@@ -40,8 +40,8 @@ class AuthRegisterState extends AuthLoginState {
     super.login,
     super.password,
     super.waitingForResponse,
-    super.user,
     this.confirmPassword,
+    super.errorMessage,
   });
 
   final String? confirmPassword;
@@ -51,15 +51,15 @@ class AuthRegisterState extends AuthLoginState {
     String? login,
     String? password,
     bool? waitingForResponse,
-    UserModel? user,
     String? confirmPassword,
+    String? errorMessage,
   }) {
     return AuthRegisterState(
       login: login ?? this.login,
       password: password ?? this.password,
       waitingForResponse: waitingForResponse ?? this.waitingForResponse,
-      user: user ?? this.user,
       confirmPassword: confirmPassword ?? this.confirmPassword,
+      errorMessage: errorMessage ?? this.errorMessage,
     );
   }
 
@@ -67,5 +67,5 @@ class AuthRegisterState extends AuthLoginState {
   bool get stringify => true;
 
   @override
-  List<Object?> get props => [login, password, waitingForResponse, user, confirmPassword];
+  List<Object?> get props => [login, password, waitingForResponse, confirmPassword];
 }

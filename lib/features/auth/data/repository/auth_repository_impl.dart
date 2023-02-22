@@ -1,4 +1,5 @@
 import 'package:balinasoft_test/core/exception/exception.dart';
+import 'package:balinasoft_test/features/auth/auth_type.dart';
 import 'package:balinasoft_test/features/auth/data/datasource/auth_local_datasource.dart';
 import 'package:balinasoft_test/features/auth/data/datasource/auth_remote_datasource.dart';
 import 'package:balinasoft_test/features/auth/data/models/auth_data_model.dart';
@@ -16,20 +17,9 @@ class AuthRepositoryImpl extends AuthRepository {
   final AuthLocalDataSource _localDataSource;
 
   @override
-  Future<Either<ServerException, UserModel>> signUp(AuthDataModel authData) async {
+  Future<Either<ServerException, UserModel>> auth(AuthDataModel authData, AuthType authType) async {
     try {
-      final user = await _remoteDataSource.signUp(authData);
-      _localDataSource.saveSignedInUser(user);
-      return Right(user);
-    } on ServerException catch (e) {
-      return Left(ServerException(message: e.message));
-    }
-  }
-
-  @override
-  Future<Either<ServerException, UserModel>> signIn(AuthDataModel authData) async {
-    try {
-      final user = await _remoteDataSource.signIn(authData);
+      final user = await _remoteDataSource.auth(authData, authType);
       _localDataSource.saveSignedInUser(user);
       return Right(user);
     } on ServerException catch (e) {
