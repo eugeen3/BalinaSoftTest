@@ -1,10 +1,13 @@
 import 'package:balinasoft_test/core/injection/service_locator.dart';
 import 'package:balinasoft_test/features/auth/presentation/cubit/auth_cubit.dart';
 import 'package:balinasoft_test/features/auth/presentation/ui/screens/auth_screen.dart';
+import 'package:balinasoft_test/features/auth/presentation/ui/screens/splash_screen.dart';
+import 'package:balinasoft_test/features/photos/presentation/screens/photos_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-void main() {
+void main() async {
+  await initDependencies();
   runApp(const MyApp());
 }
 
@@ -38,19 +41,13 @@ class MyApp extends StatelessWidget {
             primarySwatch: myColor,
           ).copyWith(secondary: Colors.white),
         ),
-        home: const AuthScreen(),
-        initialRoute: '/',
-        routes: const {},
+        initialRoute: '/splash',
+        routes: {
+          '/splash': (context) => const SplashScreen(),
+          '/auth': (context) => const AuthScreen(),
+          '/photos': (context) => const PhotosScreen(),
+        },
       ),
     );
-  }
-}
-
-class MyHomePage extends StatelessWidget {
-  const MyHomePage({Key? key}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Container();
   }
 }

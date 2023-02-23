@@ -64,6 +64,7 @@ class _LoginTabState extends State<LoginTab> {
             const SizedBox(height: 20),
             TextFormField(
               controller: _passwordController,
+              obscureText: true,
               decoration: const InputDecoration(
                 hintText: LocalizationConstants.textFieldPassword,
               ),
@@ -121,6 +122,7 @@ class _RegisterTabState extends State<RegisterTab> {
             const SizedBox(height: 20),
             TextFormField(
               controller: _passwordController,
+              obscureText: true,
               decoration: const InputDecoration(
                 hintText: LocalizationConstants.textFieldPassword,
               ),
@@ -129,6 +131,7 @@ class _RegisterTabState extends State<RegisterTab> {
             const SizedBox(height: 20),
             TextFormField(
               controller: _confirmPasswordController,
+              obscureText: true,
               decoration: const InputDecoration(
                 hintText: LocalizationConstants.textFieldConfirmPassword,
               ),

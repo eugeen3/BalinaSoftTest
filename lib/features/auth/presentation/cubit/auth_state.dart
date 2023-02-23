@@ -1,4 +1,4 @@
-part of 'app_cubit.dart';
+part of 'auth_cubit.dart';
 
 class AuthState extends Equatable {
   const AuthState({

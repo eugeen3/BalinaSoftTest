@@ -7,7 +7,7 @@ import 'package:equatable/equatable.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-part 'app_state.dart';
+part 'auth_state.dart';
 
 class AuthCubit extends Cubit<AuthState> {
   AuthCubit(this._authRepository) : super(const AuthState());
@@ -58,5 +58,9 @@ class AuthCubit extends Cubit<AuthState> {
     } else {
       return null;
     }
+  }
+
+  bool isNeedToAuth() {
+    return false;
   }
 }
