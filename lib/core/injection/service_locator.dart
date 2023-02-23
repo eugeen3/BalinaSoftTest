@@ -1,7 +1,7 @@
+import 'package:balinasoft_test/cubit/auth_cubit.dart';
 import 'package:balinasoft_test/features/auth/data/datasource/auth_remote_datasource.dart';
 import 'package:balinasoft_test/features/auth/data/repository/auth_repository_impl.dart';
 import 'package:balinasoft_test/features/auth/domain/repository/auth_repository.dart';
-import 'package:balinasoft_test/features/auth/presentation/cubit/auth_cubit.dart';
 import 'package:get_it/get_it.dart';
 import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
