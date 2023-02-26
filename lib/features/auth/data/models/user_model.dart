@@ -35,9 +35,9 @@ class UserModel extends Equatable {
 
   factory UserModel.fromMap(Map<String, dynamic> map) {
     return UserModel(
-      userId: map['userId'] as int,
-      login: map['login'] as String,
-      token: map['token'] as String,
+      userId: map['data']['userId'] as int,
+      login: map['data']['login'] as String,
+      token: map['data']['token'] as String,
     );
   }
 

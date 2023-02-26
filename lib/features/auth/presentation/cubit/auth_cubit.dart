@@ -17,14 +17,17 @@ class AuthCubit extends Cubit<AuthState> {
   Future<UserModel?> _auth(AuthDataModel authData, AuthType authType) async {
     emit(state.copyWith(waitingForResponse: true));
     final result = await _authRepository.auth(authData, authType);
+    emit(state.copyWith(waitingForResponse: false));
     result.fold(
       (exception) {
         debugPrint(exception.message);
         emit(state.copyWith(errorMessage: exception.message));
       },
-      (user) => debugPrint('Retrieved user: ${user.toString()}'),
+      (user) {
+        debugPrint('Retrieved user: ${user.toString()}');
+        emit(state.copyWith(user: user));
+      },
     );
-    emit(state.copyWith(waitingForResponse: false));
     return null;
   }
 
@@ -40,6 +43,7 @@ class AuthCubit extends Cubit<AuthState> {
         _auth(authData, AuthType.register);
       } else {
         emit(state.copyWith(errorMessage: LocalizationConstants.validatorComparePasswords));
+        emit(state.copyWith(errorMessage: null));
       }
     }
   }
@@ -61,6 +65,6 @@ class AuthCubit extends Cubit<AuthState> {
   }
 
   bool isNeedToAuth() {
-    return false;
+    return true;
   }
 }

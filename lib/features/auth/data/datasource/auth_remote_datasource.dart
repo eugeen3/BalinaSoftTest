@@ -19,15 +19,28 @@ class AuthRemoteDataSourceImpl extends AuthRemoteDataSource {
 
   static const String _signUpEndpoint = '/api/account/signup';
   static const String _signInEndpoint = '/api/account/signin';
+  static const Map<String, String> headers = {
+    'accept': 'application/json',
+    'Content-Type': 'application/json'
+  };
 
   @override
   Future<UserModel> auth(AuthDataModel authData, AuthType authType) async {
     try {
-      final uri = Uri.http(
+      final uri = Uri.https(
         AppConstants.baseURL,
         authType == AuthType.register ? _signUpEndpoint : _signInEndpoint,
       );
-      final response = await _httpClient.get(uri);
+      final body = jsonEncode({
+        'login': authData.login,
+        'password': authData.password,
+      });
+      final response = await _httpClient.post(
+        uri,
+        headers: headers,
+        body: body,
+      );
+
       if (response.statusCode == AppConstants.successHttpCode) {
         return UserModel.fromJson(response.body);
       } else {

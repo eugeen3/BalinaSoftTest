@@ -1,6 +1,7 @@
 abstract class LocalizationConstants {
   static const errorRestorUser = "Couldn't resotre user";
   static const errorAuth = 'Auth error';
+  static const errorUnknown = 'Unknown error';
 
   static const tabTitleLogin = 'Login';
   static const tabTitleRegister = 'Register';
