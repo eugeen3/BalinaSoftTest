@@ -1,6 +1,6 @@
 import 'package:balinasoft_test/core/constants/localization_constants.dart';
 import 'package:balinasoft_test/core/ui/snackbar.dart';
-import 'package:balinasoft_test/features/auth/data/models/auth_data_model.dart';
+import 'package:balinasoft_test/features/auth/data/model/auth_data_model.dart';
 import 'package:balinasoft_test/features/auth/presentation/cubit/auth_cubit.dart';
 import 'package:balinasoft_test/features/auth/presentation/ui/widgets/auth_button.dart';
 import 'package:flutter/material.dart';
@@ -26,7 +26,7 @@ class AuthScreen extends StatelessWidget {
         },
         builder: (context, state) {
           if (state.user != null) {
-            Navigator.of(context).pushReplacementNamed('/photos');
+            Navigator.of(context).pushReplacementNamed('/home');
           }
           return Scaffold(
             appBar: AppBar(

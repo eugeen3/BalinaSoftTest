@@ -1,6 +1,6 @@
 import 'package:balinasoft_test/core/constants/localization_constants.dart';
-import 'package:balinasoft_test/features/auth/data/models/auth_data_model.dart';
-import 'package:balinasoft_test/features/auth/data/models/user_model.dart';
+import 'package:balinasoft_test/features/auth/data/model/auth_data_model.dart';
+import 'package:balinasoft_test/features/auth/data/model/user_model.dart';
 import 'package:balinasoft_test/features/auth/domain/repository/auth_repository.dart';
 import 'package:balinasoft_test/features/auth/utils/auth_type.dart';
 import 'package:equatable/equatable.dart';
@@ -25,6 +25,7 @@ class AuthCubit extends Cubit<AuthState> {
       },
       (user) {
         debugPrint('Retrieved user: ${user.toString()}');
+
         emit(state.copyWith(user: user));
       },
     );

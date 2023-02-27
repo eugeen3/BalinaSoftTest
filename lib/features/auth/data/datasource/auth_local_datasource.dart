@@ -7,6 +7,7 @@ abstract class AuthLocalDataSource {
   Future<bool> isUserSignedIn();
   Future<UserModel> restoreUser();
   Future<void> saveSignedInUser(UserModel user);
+  Future<void> clearUser();
 }
 
 class AuthLocalDataSourceImpl extends AuthLocalDataSource {
@@ -47,7 +48,18 @@ class AuthLocalDataSourceImpl extends AuthLocalDataSource {
   @override
   Future<void> saveSignedInUser(UserModel user) async {
     try {
+      _sharedPreferences.setBool(_isUserSignedIn, true);
       _sharedPreferences.setString(_user, user.toJson());
+    } catch (e) {
+      throw CacheException(message: 'AuthLocalDataSource restoreUser() exception: $e');
+    }
+  }
+
+  @override
+  Future<void> clearUser() async {
+    try {
+      _sharedPreferences.setBool(_isUserSignedIn, false);
+      _sharedPreferences.remove(_user);
     } catch (e) {
       throw CacheException(message: 'AuthLocalDataSource restoreUser() exception: $e');
     }

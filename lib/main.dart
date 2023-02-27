@@ -2,7 +2,7 @@ import 'package:balinasoft_test/core/injection/service_locator.dart';
 import 'package:balinasoft_test/features/auth/presentation/cubit/auth_cubit.dart';
 import 'package:balinasoft_test/features/auth/presentation/ui/screens/auth_screen.dart';
 import 'package:balinasoft_test/features/auth/presentation/ui/screens/splash_screen.dart';
-import 'package:balinasoft_test/features/photos/presentation/screens/photos_screen.dart';
+import 'package:balinasoft_test/home.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -42,11 +42,11 @@ class MyApp extends StatelessWidget {
             primarySwatch: myColor,
           ).copyWith(secondary: Colors.white),
         ),
-        initialRoute: '/splash',
+        initialRoute: '/home',
         routes: {
           '/splash': (context) => const SplashScreen(),
           '/auth': (context) => const AuthScreen(),
-          '/photos': (context) => const PhotosScreen(),
+          '/home': (context) => const HomeScreen(),
         },
       ),
     );
