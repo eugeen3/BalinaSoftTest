@@ -6,6 +6,8 @@ abstract class LocalizationConstants {
   static const errorUploadPhoto = "Can't upload photo";
   static const errorDeletePhoto = "Can't delete photo";
 
+  static const textNoImages = 'No photos ;(';
+
   static const tabTitleLogin = 'Login';
   static const tabTitleRegister = 'Register';
 

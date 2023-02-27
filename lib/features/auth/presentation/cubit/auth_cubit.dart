@@ -25,7 +25,6 @@ class AuthCubit extends Cubit<AuthState> {
       },
       (user) {
         debugPrint('Retrieved user: ${user.toString()}');
-
         emit(state.copyWith(user: user));
       },
     );
@@ -67,5 +66,9 @@ class AuthCubit extends Cubit<AuthState> {
 
   bool isNeedToAuth() {
     return true;
+  }
+
+  void mockAuth(String token) {
+    emit(state.copyWith(user: UserModel(userId: 1502, login: 'abobus', token: token)));
   }
 }

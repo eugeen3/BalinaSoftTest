@@ -30,6 +30,7 @@ class MyApp extends StatelessWidget {
       900: Color(0xff8bc34a),
     },
   );
+  static const accentColor = Colors.white;
 
   @override
   Widget build(BuildContext context) {
@@ -40,7 +41,18 @@ class MyApp extends StatelessWidget {
         theme: ThemeData(
           colorScheme: ColorScheme.fromSwatch(
             primarySwatch: myColor,
-          ).copyWith(secondary: Colors.white),
+          ).copyWith(secondary: accentColor),
+          textTheme: const TextTheme(
+            displayLarge: TextStyle(
+              color: myColor,
+              fontSize: 26,
+              fontWeight: FontWeight.w600,
+            ),
+            labelMedium: TextStyle(
+              color: accentColor,
+              fontSize: 20,
+            ),
+          ),
         ),
         initialRoute: '/home',
         routes: {

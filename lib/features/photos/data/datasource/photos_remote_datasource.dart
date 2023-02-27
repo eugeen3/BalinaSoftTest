@@ -23,11 +23,13 @@ class PhotosRemoteDataSourceImpl extends PhotosRemoteDataSource {
   @override
   Future<List<DownloadedPhotoModel>> getPhotos(String userToken, int page) async {
     try {
-      final Map<String, dynamic> query = {'page': page};
-      final Map<String, String> headers = {'Access-Token': userToken};
+      final Map<String, dynamic> query = {'page': '$page'};
+      final Map<String, String> headers = {
+        'Access-Token': userToken,
+      };
       final uri = Uri.https(HttpConstants.baseURL, _endpoint, query);
 
-      final response = await _httpClient.post(
+      final response = await _httpClient.get(
         uri,
         headers: headers,
       );
@@ -39,7 +41,12 @@ class PhotosRemoteDataSourceImpl extends PhotosRemoteDataSource {
         throw ServerException(message: '${LocalizationConstants.errorGetPhotos}: $error');
       }
     } catch (e) {
-      throw ServerException(message: 'PhotosRemoteDataSource getPhotos() exception: $e');
+      if (e is ServerException) {
+        rethrow;
+      } else {
+        throw ServerException(
+            message: 'PhotosRemoteDataSource getPhotos() exception: ${e.toString()}');
+      }
     }
   }
 

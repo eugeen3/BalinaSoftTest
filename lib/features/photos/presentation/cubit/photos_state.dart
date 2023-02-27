@@ -1,10 +1,31 @@
 part of 'photos_cubit.dart';
 
-abstract class PhotosState extends Equatable {
-  const PhotosState();
+class PhotosState extends Equatable {
+  const PhotosState({
+    required this.photos,
+    this.errorMessage,
+    required this.isLoading,
+  });
+
+  final List<DownloadedPhotoModel> photos;
+  final String? errorMessage;
+  final bool isLoading;
+
+  PhotosState copyWith({
+    List<DownloadedPhotoModel>? photos,
+    String? errorMessage,
+    bool? isLoading,
+  }) {
+    return PhotosState(
+      photos: photos ?? this.photos,
+      errorMessage: errorMessage ?? this.errorMessage,
+      isLoading: isLoading ?? this.isLoading,
+    );
+  }
 
   @override
-  List<Object> get props => [];
-}
+  bool get stringify => true;
 
-class PhotosInitial extends PhotosState {}
+  @override
+  List<Object?> get props => [photos, errorMessage, isLoading];
+}

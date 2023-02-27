@@ -57,7 +57,7 @@ class DownloadedPhotoModel extends Equatable {
 
   static List<DownloadedPhotoModel> fromList(Map<String, dynamic> map) {
     return (map['data'] as List<dynamic>)
-        .map((photoJson) => DownloadedPhotoModel.fromJson(photoJson))
+        .map((photoJson) => DownloadedPhotoModel.fromMap(photoJson))
         .toList();
   }
 
