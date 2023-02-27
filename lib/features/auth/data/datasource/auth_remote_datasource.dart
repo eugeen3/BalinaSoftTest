@@ -1,10 +1,10 @@
 import 'dart:convert';
 
-import 'package:balinasoft_test/core/constants/app_constants.dart';
+import 'package:balinasoft_test/core/constants/http_constants.dart';
 import 'package:balinasoft_test/core/constants/localization_constants.dart';
 import 'package:balinasoft_test/core/exception/exception.dart';
-import 'package:balinasoft_test/features/auth/data/models/auth_data_model.dart';
-import 'package:balinasoft_test/features/auth/data/models/user_model.dart';
+import 'package:balinasoft_test/features/auth/data/model/auth_data_model.dart';
+import 'package:balinasoft_test/features/auth/data/model/user_model.dart';
 import 'package:balinasoft_test/features/auth/utils/auth_type.dart';
 import 'package:http/http.dart' as http;
 
@@ -17,18 +17,18 @@ class AuthRemoteDataSourceImpl extends AuthRemoteDataSource {
 
   final http.Client _httpClient;
 
-  static const String _signUpEndpoint = '/api/account/signup';
-  static const String _signInEndpoint = '/api/account/signin';
   static const Map<String, String> headers = {
     'accept': 'application/json',
     'Content-Type': 'application/json'
   };
+  static const String _signUpEndpoint = '/api/account/signup';
+  static const String _signInEndpoint = '/api/account/signin';
 
   @override
   Future<UserModel> auth(AuthDataModel authData, AuthType authType) async {
     try {
       final uri = Uri.https(
-        AppConstants.baseURL,
+        HttpConstants.baseURL,
         authType == AuthType.register ? _signUpEndpoint : _signInEndpoint,
       );
       final body = jsonEncode({
@@ -41,8 +41,8 @@ class AuthRemoteDataSourceImpl extends AuthRemoteDataSource {
         body: body,
       );
 
-      if (response.statusCode == AppConstants.successHttpCode) {
-        return UserModel.fromJson(response.body);
+      if (response.statusCode == HttpConstants.successHttpCode) {
+        return UserModel.fromResponseJson(response.body);
       } else {
         final error = jsonDecode(response.body)['error'];
         throw ServerException(message: '${LocalizationConstants.errorAuth}: $error');

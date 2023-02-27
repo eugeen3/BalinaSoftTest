@@ -2,6 +2,9 @@ abstract class LocalizationConstants {
   static const errorRestorUser = "Couldn't resotre user";
   static const errorAuth = 'Auth error';
   static const errorUnknown = 'Unknown error';
+  static const errorGetPhotos = "Can't get photos from server";
+  static const errorUploadPhoto = "Can't upload photo";
+  static const errorDeletePhoto = "Can't delete photo";
 
   static const tabTitleLogin = 'Login';
   static const tabTitleRegister = 'Register';

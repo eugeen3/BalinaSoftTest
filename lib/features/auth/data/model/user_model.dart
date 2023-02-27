@@ -35,16 +35,19 @@ class UserModel extends Equatable {
 
   factory UserModel.fromMap(Map<String, dynamic> map) {
     return UserModel(
-      userId: map['data']['userId'] as int,
-      login: map['data']['login'] as String,
-      token: map['data']['token'] as String,
+      userId: map['userId'] as int,
+      login: map['login'] as String,
+      token: map['token'] as String,
     );
   }
 
   String toJson() => json.encode(toMap());
 
+  factory UserModel.fromResponseJson(String source) =>
+      UserModel.fromMap((json.decode(source) as Map<String, dynamic>)['data']);
+
   factory UserModel.fromJson(String source) =>
-      UserModel.fromMap(json.decode(source) as Map<String, dynamic>);
+      UserModel.fromMap((json.decode(source) as Map<String, dynamic>));
 
   @override
   bool get stringify => true;

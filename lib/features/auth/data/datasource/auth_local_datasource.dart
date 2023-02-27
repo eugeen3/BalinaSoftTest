@@ -1,6 +1,6 @@
 import 'package:balinasoft_test/core/constants/localization_constants.dart';
 import 'package:balinasoft_test/core/exception/exception.dart';
-import 'package:balinasoft_test/features/auth/data/models/user_model.dart';
+import 'package:balinasoft_test/features/auth/data/model/user_model.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 abstract class AuthLocalDataSource {
@@ -35,7 +35,7 @@ class AuthLocalDataSourceImpl extends AuthLocalDataSource {
     try {
       final user = _sharedPreferences.getString(_user);
       if (user != null) {
-        return UserModel.fromJson(user);
+        return UserModel.fromResponseJson(user);
       } else {
         throw CacheException(message: LocalizationConstants.errorRestorUser);
       }
